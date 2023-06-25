@@ -9,6 +9,7 @@ export default {
       primaryBtnHover: "#3767c8",
       secondaryBtn: "#241b0a",
       accent: "#4370cb",
+      secondaryAccent: "#5c944c",
       secondaryBg1: "#201b12",
       secondaryBg2: "#17140f",
     },

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useRef } from "react"
 import Note from "../types/Note"
 
 interface NoteContextInterface {
@@ -11,6 +11,7 @@ interface NoteContextInterface {
   deleteNote: (clickedNoteCreatedAt: Date) => void
   noteSearchInput: string
   editSearchInput: (newValue: string) => void
+  editorRef: React.MutableRefObject<HTMLTextAreaElement | null>
 }
 
 export const NoteContext = createContext<NoteContextInterface>(
@@ -39,10 +40,13 @@ export default function NoteContextProvider({
   const [currentNote, setCurrentNote] = useState(blankNote())
   const [noteSearchInput, setNoteSearchInput] = useState("")
 
+  const editorRef = useRef<HTMLTextAreaElement | null>(null)
+
   function addNote() {
     const newNote = blankNote()
     setNotes(notes => [newNote, ...notes])
     setCurrentNote(newNote)
+    editorRef.current?.focus()
   }
 
   function selectNote(clickedNoteCreatedAt: Date) {
@@ -50,6 +54,7 @@ export default function NoteContextProvider({
       ({ createdAt }) => createdAt === clickedNoteCreatedAt
     )
     selectedNote && setCurrentNote(selectedNote)
+    editorRef.current?.focus()
   }
 
   function editCurrentNote(property: "title" | "body", newValue: string) {
@@ -99,6 +104,7 @@ export default function NoteContextProvider({
         deleteNote,
         noteSearchInput,
         editSearchInput,
+        editorRef,
       }}
     >
       {children}
