@@ -11,7 +11,7 @@ export default function NotePreview({ note }: NotePreviewProps) {
   const { selectNote, deleteNote } = useContext(NoteContext)
   const { createdAt, title, body } = note
 
-  const noteContent = useMemo(() => body.slice(0, 275), [body])
+  const noteContent = useMemo(() => body.slice(0, 225), [body])
 
   return (
     <article className="bg-secondaryBg1 flex-grow p-3 h-44 rounded mb-3">

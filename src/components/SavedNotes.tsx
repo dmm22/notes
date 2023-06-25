@@ -6,7 +6,7 @@ export default function SavedNotes() {
   const { notes } = useContext(NoteContext)
 
   return (
-    <div className="w-1/6 text-text">
+    <div>
       {notes.map(note => (
         <NotePreview note={note} key={`${note.createdAt}`} />
       ))}
