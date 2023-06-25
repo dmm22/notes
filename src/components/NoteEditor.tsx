@@ -2,8 +2,14 @@ import { useContext } from "react"
 import { NoteContext } from "../contexts/NoteContext"
 
 export default function NoteEditor() {
-  const { currentNote, editCurrentNote, saveCurrentNote, notes, addNote } =
-    useContext(NoteContext)
+  const {
+    currentNote,
+    editCurrentNote,
+    saveCurrentNote,
+    notes,
+    addNote,
+    selectNote,
+  } = useContext(NoteContext)
   const { title, body } = currentNote
 
   return (
@@ -20,7 +26,16 @@ export default function NoteEditor() {
         value={body}
         className="bg-bg resize-none border-secondaryBg1 border-2"
       ></textarea>
-      <pre>{JSON.stringify(notes, null, 2)}</pre>
+      <div>
+        {notes.map(note => (
+          <pre
+            onClick={() => selectNote(note.createdAt)}
+            key={`${note.createdAt}`}
+          >
+            {JSON.stringify(note)}
+          </pre>
+        ))}
+      </div>
     </section>
   )
 }

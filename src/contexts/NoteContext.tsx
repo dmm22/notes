@@ -7,6 +7,7 @@ interface NoteContextInterface {
   editCurrentNote: (property: "title" | "body", newValue: string) => void
   saveCurrentNote: () => void
   addNote: () => void
+  selectNote: (clickedNoteCreatedAt: Date) => void
 }
 
 export const NoteContext = createContext<NoteContextInterface>(
@@ -32,6 +33,13 @@ export default function NoteContextProvider({
     const newNote = blankNote()
     setNotes(notes => [newNote, ...notes])
     setCurrentNote(newNote)
+  }
+
+  function selectNote(clickedNoteCreatedAt: Date) {
+    const selectedNote = notes.find(
+      ({ createdAt }) => createdAt === clickedNoteCreatedAt
+    )
+    selectedNote && setCurrentNote(selectedNote)
   }
 
   function editCurrentNote(property: "title" | "body", newValue: string) {
@@ -66,6 +74,7 @@ export default function NoteContextProvider({
         editCurrentNote,
         saveCurrentNote,
         addNote,
+        selectNote,
       }}
     >
       {children}
