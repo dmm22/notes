@@ -9,6 +9,8 @@ interface NoteContextInterface {
   addNote: () => void
   selectNote: (clickedNoteCreatedAt: Date) => void
   deleteNote: (clickedNoteCreatedAt: Date) => void
+  noteSearchInput: string
+  editSearchInput: (newValue: string) => void
 }
 
 export const NoteContext = createContext<NoteContextInterface>(
@@ -35,6 +37,7 @@ export default function NoteContextProvider({
     },
   ])
   const [currentNote, setCurrentNote] = useState(blankNote())
+  const [noteSearchInput, setNoteSearchInput] = useState("")
 
   function addNote() {
     const newNote = blankNote()
@@ -80,6 +83,10 @@ export default function NoteContextProvider({
     )
   }
 
+  function editSearchInput(newValue: string) {
+    setNoteSearchInput(newValue)
+  }
+
   return (
     <NoteContext.Provider
       value={{
@@ -90,6 +97,8 @@ export default function NoteContextProvider({
         addNote,
         selectNote,
         deleteNote,
+        noteSearchInput,
+        editSearchInput,
       }}
     >
       {children}
