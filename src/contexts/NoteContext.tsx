@@ -1,5 +1,6 @@
 import { createContext, useState, useRef } from "react"
 import Note from "../types/Note"
+import placeHolderNotes from "../data/placeholderNotes"
 
 interface NoteContextInterface {
   notes: Note[]
@@ -30,13 +31,7 @@ export default function NoteContextProvider({
 }: {
   children: JSX.Element
 }) {
-  const [notes, setNotes] = useState<Note[]>([
-    {
-      title: "Placeholder Note",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi qui est in modi, harum, non nisi numquam earum quam quos voluptas doloremque quas deleniti sapiente illo cumque expedita vero ratione delectus, voluptatem eum officia eveniet rem? Voluptatibus magni optio culpa, laudantium quidem velit alias error eveniet tempora incidunt ratione illo consequuntur, aperiam, minima enim odio architecto quo neque excepturi id quos minus placeat! Optio qui dolorum at. Similique maxime recusandae illo error amet perferendis provident voluptatem sed placeat debitis! Totam maxime nesciunt doloribus doloremque natus veniam asperiores nostrum exercitationem quam nam sunt vitae facere, laudantium inventore facilis molestiae! Similique, pariatur.",
-      createdAt: new Date(),
-    },
-  ])
+  const [notes, setNotes] = useState<Note[]>(placeHolderNotes)
   const [currentNote, setCurrentNote] = useState(blankNote())
   const [noteSearchInput, setNoteSearchInput] = useState("")
 
