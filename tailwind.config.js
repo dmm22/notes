@@ -14,7 +14,7 @@ export default {
     },
     fontFamily: {
       sans: ["Nunito", "Roboto", "sans-serif"],
-      serif: ["Nunito", "serif"],
+      serif: ["Roboto", "serif"],
     },
     extend: {},
   },
