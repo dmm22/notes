@@ -2,10 +2,11 @@ import { createContext, useState } from "react"
 import Note from "../types/Note"
 
 interface NoteContextInterface {
-  note: Note[]
+  notes: Note[]
   currentNote: Note
   editCurrentNote: (property: "title" | "body", newValue: string) => void
   saveCurrentNote: () => void
+  addNote: () => void
 }
 
 export const NoteContext = createContext<NoteContextInterface>(
@@ -26,6 +27,12 @@ export default function NoteContextProvider({
 }) {
   const [notes, setNotes] = useState<Note[]>([])
   const [currentNote, setCurrentNote] = useState(blankNote())
+
+  function addNote() {
+    const newNote = blankNote()
+    setNotes(notes => [newNote, ...notes])
+    setCurrentNote(newNote)
+  }
 
   function editCurrentNote(property: "title" | "body", newValue: string) {
     setCurrentNote(currentNote => ({ ...currentNote, [property]: newValue }))
@@ -58,6 +65,7 @@ export default function NoteContextProvider({
         currentNote,
         editCurrentNote,
         saveCurrentNote,
+        addNote,
       }}
     >
       {children}
