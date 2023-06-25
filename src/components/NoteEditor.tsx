@@ -9,6 +9,7 @@ export default function NoteEditor() {
     notes,
     addNote,
     selectNote,
+    deleteNote,
   } = useContext(NoteContext)
   const { title, body } = currentNote
 
@@ -28,12 +29,12 @@ export default function NoteEditor() {
       ></textarea>
       <div>
         {notes.map(note => (
-          <pre
-            onClick={() => selectNote(note.createdAt)}
-            key={`${note.createdAt}`}
-          >
-            {JSON.stringify(note)}
-          </pre>
+          <div key={`${note.createdAt}`}>
+            <pre onClick={() => selectNote(note.createdAt)}>
+              {JSON.stringify(note)}
+            </pre>
+            <button onClick={() => deleteNote(note.createdAt)}>Delete</button>
+          </div>
         ))}
       </div>
     </section>
