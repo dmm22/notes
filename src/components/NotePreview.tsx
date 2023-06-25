@@ -14,9 +14,16 @@ export default function NotePreview({ note }: NotePreviewProps) {
   const noteContent = useMemo(() => body.slice(0, 275), [body])
 
   return (
-    <article className="bg-secondaryBg1 flex-grow p-3 h-48">
+    <article className="bg-secondaryBg1 flex-grow p-3 h-44 rounded mb-3">
       <div className="flex justify-between items-center mb-2">
-        <strong>{title}</strong>
+        <div className="flex items-center gap-2">
+          <strong>{title}</strong>
+          <Icon
+            iconName="edit"
+            clickHandler={() => selectNote(createdAt)}
+            size="sm"
+          />
+        </div>
         <div className="flex items-center gap-2">
           <span className="italic text-sm font-serif">
             {createdAt.toLocaleDateString("en-US", {
